@@ -1,0 +1,5 @@
+build:
+  docker:
+    web: Dockerfile
+run:
+  web: dotnet bin/Release/netcoreapp2.2/textanalyser.api.dll

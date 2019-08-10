@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\textanalyser.interfaces\textanalyser.interfaces.csproj" />
+    <ProjectReference Include="..\textanalyser.infra.common\textanalyser.infra.common.csproj" />
+    <ProjectReference Include="..\textanalyser.providers\textanalyser.providers.csproj" />
+  </ItemGroup>
+
+</Project>
