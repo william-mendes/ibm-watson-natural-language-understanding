@@ -17,7 +17,6 @@ namespace textanalyser.api.Controllers
         }
 
         // GET api/fetch/url
-        [HttpGet("url")]
         [HttpGet("url/{url}")]
         public async Task<ActionResult<FetchAnalysisResponse>> LoadFromUrl(string url)
         {
@@ -31,7 +30,6 @@ namespace textanalyser.api.Controllers
         }
 
         // GET api/fetch/text
-        [HttpGet("text")]
         [HttpGet("text/{text}")]
         public async Task<ActionResult<FetchAnalysisResponse>> LoadFromText(string text)
         {
