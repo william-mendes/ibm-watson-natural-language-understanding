@@ -13,6 +13,7 @@
     <PackageReference Include="IBM.Cloud.SDK.Core" Version="0.8.0" />
     <PackageReference Include="IBM.Watson.NaturalLanguageClassifier.v1" Version="3.2.0" />
     <PackageReference Include="IBM.WatsonDeveloperCloud.NaturalLanguageUnderstanding.v1" Version="2.17.0" />
+    <PackageReference Include="Google.Apis.Customsearch.v1" Version="1.40.3.1369" />
   </ItemGroup>
 
 </Project>

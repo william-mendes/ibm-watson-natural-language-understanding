@@ -4,10 +4,10 @@ using textanalyser.domain.core;
 
 namespace textanalyser.interfaces
 {
-    public interface IFetchUrlService
+    public interface IFetchService
     {
-        WatsonReponse FetchFromUrl(string url);
+        Task<FetchAnalysis> FetchFromUrl(string url);
 
-        WatsonReponse FetchFromText(string text);
+        Task<FetchAnalysis> FetchFromText(string text);
     }
 }

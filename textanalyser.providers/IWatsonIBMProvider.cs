@@ -1,11 +1,12 @@
+using System.Threading.Tasks;
 using textanalyser.domain.core;
 
 namespace textanalyser.providers
 {
     public interface IWatsonIBMProvider
     {
-        WatsonReponse LoadWatsonFromUrl(string url);
+        Task<WatsonReponse> LoadWatsonFromUrl(string url);
 
-        WatsonReponse LoadWatsonFromText(string text);
+        Task<WatsonReponse> LoadWatsonFromText(string text);
     }
 }

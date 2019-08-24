@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using textanalyser.api.data.resposes;
 using textanalyser.interfaces;
 
@@ -8,39 +9,39 @@ namespace textanalyser.api.Controllers
     [ApiController]
     public class FetchAnalysisController : ControllerBase
     {
-        private IFetchUrlService _fetchUrlService;
+        private IFetchService _fetchService;
 
-        public FetchAnalysisController(IFetchUrlService fetchUrlService)
+        public FetchAnalysisController(IFetchService fetchUrlService)
         {
-            _fetchUrlService = fetchUrlService;
+            _fetchService = fetchUrlService;
         }
 
         // GET api/fetch/url
+        [HttpGet("url")]
         [HttpGet("url/{url}")]
-        public ActionResult<FetchAnalysisResponse> LoadFromUrl(string url)
+        public async Task<ActionResult<FetchAnalysisResponse>> LoadFromUrl(string url)
         {
-            var watsonResponse = _fetchUrlService.FetchFromUrl(url);
+            var fetchAnalysis = await _fetchService.FetchFromUrl(url);
 
-            var response = new FetchAnalysisResponse()
+            return Ok(new FetchAnalysisResponse()
             {
-                WatsonReponse = watsonResponse,
-            };
-
-            return Ok(response);
+                WatsonReponse = fetchAnalysis.WatsonResponse,
+                Images = fetchAnalysis.Images
+            });
         }
 
         // GET api/fetch/text
+        [HttpGet("text")]
         [HttpGet("text/{text}")]
-        public ActionResult<FetchAnalysisResponse> LoadFromText(string text)
+        public async Task<ActionResult<FetchAnalysisResponse>> LoadFromText(string text)
         {
-            var watsonResponse = _fetchUrlService.FetchFromText(text);
+            var fetchAnalysis = await _fetchService.FetchFromText(text);
 
-            var response = new FetchAnalysisResponse()
+            return Ok(new FetchAnalysisResponse()
             {
-                WatsonReponse = watsonResponse,
-            };
-
-            return Ok(response);
+                WatsonReponse = fetchAnalysis.WatsonResponse,
+                Images = fetchAnalysis.Images
+            });
         }
     }
 }

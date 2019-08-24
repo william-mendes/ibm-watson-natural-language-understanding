@@ -20,5 +20,10 @@ namespace textanalyser.infra.common
         public string WatsonApiKey() => _configuration.GetSection("IBMCredentials:WatsonApiKey").Value;
 
         public string WatsonVersionDate() => _configuration.GetSection("IBMCredentials:WatsonVersionDate").Value;
+
+        public string GoogleApiKey() => _configuration.GetSection("GoogleCredentials:ApiKey").Value;
+
+        public string GoogleCustomSearchCx() => _configuration.GetSection("GoogleCredentials:SearchEngineId").Value;
+
     }
 }

@@ -6,6 +6,7 @@ using IBM.WatsonDeveloperCloud.Util;
 using textanalyser.infra.common;
 using textanalyser.domain.core;
 using System;
+using System.Threading.Tasks;
 
 namespace textanalyser.providers
 {
@@ -20,16 +21,16 @@ namespace textanalyser.providers
             _service.SetEndpoint(appSettings.WatsonUrl());
         }
 
-        public WatsonReponse LoadWatsonFromUrl(string url)
+        public Task<WatsonReponse> LoadWatsonFromUrl(string url)
         {
             var parameters = BuildParameters(url: url);
-            return LoadNaturalLanguageUnderstanding(parameters);
+            return Task.Run(() => LoadNaturalLanguageUnderstanding(parameters));
         }
 
-        public WatsonReponse LoadWatsonFromText(string text)
+        public Task<WatsonReponse> LoadWatsonFromText(string text)
         {
             var parameters = BuildParameters(text: text);
-            return LoadNaturalLanguageUnderstanding(parameters);
+            return Task.Run(() => LoadNaturalLanguageUnderstanding(parameters));
         }
 
         private static Parameters BuildParameters(string url = null, string text = null)
@@ -71,7 +72,6 @@ namespace textanalyser.providers
                 Categories = new CategoriesOptions() { Limit = 5 },
                 Keywords = new KeywordsOptions()
                 {
-                    Limit = 10,
                     Sentiment = true,
                     Emotion = true
                 }

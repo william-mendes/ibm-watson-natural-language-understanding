@@ -10,8 +10,9 @@ namespace textanalyser.infra.di
     {
         public static void LoadServicesLayer(this IServiceCollection services)
         {
-            services.AddScoped<IFetchUrlService, FetchAnalysisService>();
+            services.AddScoped<IFetchService, FetchAnalysisService>();
             services.AddScoped<IWatsonIBMProvider, WatsonIBMProvider>();
+            services.AddScoped<IGoogleCustomSearch, GoogleCustomSearch>();
 
             services.AddSingleton<AppSettings>();
         }
