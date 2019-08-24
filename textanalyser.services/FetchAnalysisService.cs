@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using textanalyser.domain.core;
 using textanalyser.infra.common;
@@ -28,7 +30,7 @@ namespace textanalyser.services
                 url = System.Uri.UnescapeDataString(url);
 
             var watsonResponse = await _watsonProvider.LoadWatsonFromUrl(url);
-            var images = await _googleCustomSearch.LoadGoogleImages(watsonResponse.Keywords.Keys.ToList());
+            var images = await LoadImages(watsonResponse.Keywords.Keys.ToList());
 
             return new FetchAnalysis()
             {
@@ -43,13 +45,25 @@ namespace textanalyser.services
                 text = _appSettings.DefaultText();
 
             var watsonResponse = await _watsonProvider.LoadWatsonFromText(text);
-            var images = await _googleCustomSearch.LoadGoogleImages(watsonResponse.Keywords.Keys.ToList());
+            var images = await LoadImages(watsonResponse.Keywords.Keys.ToList());
 
             return new FetchAnalysis()
             {
                 WatsonResponse = watsonResponse,
                 Images = images
             };
+        }
+
+        private async Task<List<Image>> LoadImages(List<string> keywords)
+        {
+            try
+            {
+                return await _googleCustomSearch.LoadGoogleImages(keywords);
+            }
+            catch (Exception ex)
+            {
+                return new List<Image>() { new Image() { ErrorMessage = ex.Message } };
+            }
         }
     }
 }
